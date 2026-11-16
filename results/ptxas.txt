@@ -1,0 +1,33 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z8k_sharedILi64ELi8ELb0EEviiiiiPKfS1_S1_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sharedILi64ELi8ELb0EEviiiiiPKfS1_S1_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 4608 bytes smem
+ptxas info    : Compiling entry function '_Z8k_sharedILi64ELi4ELb0EEviiiiiPKfS1_S1_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sharedILi64ELi4ELb0EEviiiiiPKfS1_S1_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 3456 bytes smem
+ptxas info    : Compiling entry function '_Z8k_sharedILi32ELi4ELb0EEviiiiiPKfS1_S1_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sharedILi32ELi4ELb0EEviiiiiPKfS1_S1_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 1920 bytes smem
+ptxas info    : Compiling entry function '_Z8k_sharedILi32ELi16ELb0EEviiiiiPKfS1_S1_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sharedILi32ELi16ELb0EEviiiiiPKfS1_S1_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 3840 bytes smem
+ptxas info    : Compiling entry function '_Z8k_sharedILi32ELi8ELb1EEviiiiiPKfS1_S1_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sharedILi32ELi8ELb1EEviiiiiPKfS1_S1_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 2560 bytes smem
+ptxas info    : Compiling entry function '_Z8k_sharedILi32ELi8ELb0EEviiiiiPKfS1_S1_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sharedILi32ELi8ELb0EEviiiiiPKfS1_S1_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 1 barriers, 2560 bytes smem
+ptxas info    : Compiling entry function '_Z8k_sourcePfmf' for 'sm_90'
+ptxas info    : Function properties for _Z8k_sourcePfmf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 8 registers, used 0 barriers
+ptxas info    : Compiling entry function '_Z7k_naiveiiiiiPKfS0_S0_Pf' for 'sm_90'
+ptxas info    : Function properties for _Z7k_naiveiiiiiPKfS0_S0_Pf
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 32 registers, used 0 barriers

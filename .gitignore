@@ -1,0 +1,7 @@
+bin/
+.venv/
+__pycache__/
+*.o
+*.nsys-rep
+*.sqlite
+.DS_Store

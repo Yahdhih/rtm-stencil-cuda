@@ -1,0 +1,5 @@
+check,naive,128,64,96,40,max|p|=7.239e-07,max_err=5.684e-14,rel=7.85e-08
+check,shared,128,64,96,40,max|p|=7.239e-07,max_err=5.684e-14,rel=7.85e-08
+check,sharedp,128,64,96,40,max|p|=7.239e-07,max_err=5.684e-14,rel=7.85e-08
+check,shared-zs,128,64,96,40,max|p|=7.239e-07,max_err=5.684e-14,rel=7.85e-08
+check,shared-64x4-zs,128,64,96,40,max|p|=7.239e-07,max_err=5.684e-14,rel=7.85e-08
