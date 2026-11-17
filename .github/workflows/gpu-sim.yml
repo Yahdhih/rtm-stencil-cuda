@@ -1,0 +1,71 @@
+name: GPU Simulator
+
+# Optional, non-required check. The hosted runners have no GPU, so this runs
+# the rtm_gpu correctness check on a simulated NVIDIA H100
+# (https://github.com/pantheongpu/pantheonsim). A simulator has no timing
+# model and cannot reproduce hardware-specific behavior, so it complements
+# real-GPU testing and does not replace it.
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/rtm.h"
+      - "src/rtm_gpu.cu"
+      - "Makefile"
+      - ".github/workflows/gpu-sim.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: rtm_gpu check (CUDA 13.0 and simulated H100)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Set up the simulated GPU and CUDA toolkit
+        uses: pantheongpu/setup-pantheonsim@a1b9d4237411f9b2b0e0bb895b4d83377f336a7b # v0.1.9
+        with:
+          gpu: nvidia/h100
+          cuda-toolkit: "13.0"
+
+      # Only the GPU binary is built (the CPU target needs nvc++). The
+      # Makefile's -arch=sm_90 embeds PTX, which the simulator runs; it is
+      # overridden to compute_90 (PTX only) and a shared CUDA runtime, which
+      # the simulator requires.
+      - name: Build
+        run: |
+          mkdir -p bin
+          nvcc -O3 -std=c++17 -arch=compute_90 -cudart shared -o bin/rtm_gpu src/rtm_gpu.cu
+
+      # "check" compares each GPU version against a sequential host
+      # reference, but only prints the error. Fail unless all five versions
+      # report, the field is non-zero and the relative error is small
+      # (the committed results show about 8e-8).
+      - name: Check
+        shell: bash
+        run: |
+          set -o pipefail
+          vgpu run bin/rtm_gpu check 128 64 96 40 1 | tee check.log
+          test "$(grep -c '^check,' check.log)" -eq 5
+          for v in naive shared sharedp shared-zs shared-64x4-zs; do
+            grep -q "^check,$v," check.log || { echo "::error::no result for $v"; exit 1; }
+          done
+          if grep -Eqi "error|fail|skipped|nan|inf" check.log; then
+            echo "::error::unexpected output"
+            exit 1
+          fi
+          awk -F, '/^check,/ {
+            split($7, a, "="); split($9, r, "=");
+            if (a[2] + 0 <= 0 || r[2] + 0 > 1e-5 || r[2] + 0 != r[2] + 0) { print "bad line: " $0; bad = 1 }
+          } END { exit bad }' check.log
